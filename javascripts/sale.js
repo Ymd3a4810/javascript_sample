@@ -6,24 +6,37 @@ const products = [
     "id":2, "name":"オリジナルブレンド500g", price:900 
   },
   {
-    "id":1, "name":"スペシャルブレンド200g", price:700 
+    "id":3, "name":"スペシャルブレンド200g", price:700 
   },
   {
-    "id":1, "name":"スペシャルブレンド500g", price:1200 
+    "id":4, "name":"スペシャルブレンド500g", price:1200 
   }
-
+  
 ]
 
 const priceElement = document.getElementById("product");
 const numberElement = document.getElementById("number");
 
-let purchase = [];
 
-function add() {
-    const price = parseInt(priceElement.value);
+//console.log("priceElement", priceElement);
+//console.log("numberElement",numberElement);
+
+let purchases = [];
+
+  function add() {
+    // 型を意識する
+    console.log("priceElement.value: ", typeof(priceElement.value));
+    const id = parseInt(priceElement.value);
     const number = parseInt(numberElement.value);
+    console.log("id", id);
+    console.log("number", number);
+
+    var found = products.find(item => item.id === id);
+    console.log(found.price);
+    console.log(found["price"]);
+
     const purchase = {
-      price: price,
+      price: 0,
       number: number,
     };
     purchases.push(purchase);
