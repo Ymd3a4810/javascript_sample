@@ -31,20 +31,50 @@ let purchases = [];
     console.log("id", id);
     console.log("number", number);
 
+    //idを取得
     var found = products.find(item => item.id === id);
+    console.log(found.id);
     console.log(found.price);
-    console.log(found["price"]);
 
-    const purchase = {
-      price: 0,
-      number: number,
-    };
-    purchases.push(purchase);
+
+    
+    // purchasesの中に、取得したidがいるかいないか確認する
+    const foundIndex = purchases.findIndex(purchase => purchase.id === id );
+    // 1) 新しくpurchaseオブジェクトを作成するときには、pushをする
+    if (foundIndex === -1){
+      const purchase = {
+        id : found.id,
+        name: found.name,
+        price: found.price,
+        number: number,
+      };
+      console.log("なかった場合");
+      purchases.push(purchase);
+    }
+    // 2) すでに、purchaseオブジェクトにその商品が登録されている場合には、numberに数を追加する
+    else {
+      console.log("あった場合");      
+      console.log(purchases[foundIndex]);
+      // TODO: purchases[foundIndex].number に数値をたす
+      purchases[foundIndex].number += number;
+    }
+    // purchases.push(purchase);
     window.alert(`${display()}\n小計${subtotal()}円`);
   }
   function display() {
+    /* 
+    // resultというのはarrayとして返却されている
+    const result = purchases.map(purchase => {
+      return `${purchase.name}${purchase.price}円が${purchase.number}点`
+    });
+    console.log("result:", result);
+    // resultはarrayなので、join関数で改行区切りの文字列に変換している
+    const result_str = result.join("\n");
+    console.log("result_str:", result_str);
+    return result_str;
+    */
     return purchases.map(purchase => {
-      return `${purchase.price}円が${purchase.number}点`
+      return `${purchase.name}${purchase.price}円が${purchase.number}点`
     }).join("\n");
   };
   
